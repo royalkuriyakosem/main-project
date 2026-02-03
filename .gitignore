@@ -63,6 +63,7 @@ htmlcov/
 temp_*.json
 temp_*.png
 *.pkl.bak
+.agent/
 
 # Debug visuals (can be regenerated)
 frontend/public/debug_visuals/*.png
