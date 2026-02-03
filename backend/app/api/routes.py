@@ -169,12 +169,25 @@ def predict(data: URLRequest):
         
         # Fusion Logic
         if d_score is None:
-            # Site Unreachable -> Rely 100% on URL Model
-            print("DEBUG: Site Unreachable. Fallback to URL Model.")
+            # Site Unreachable -> Apply stricter logic
+            print("DEBUG: Site Unreachable. Applying unreachable site logic.")
             d_score = 0.0
             v_score = 0.0
             similarity_score = 0.0
-            phishing_prob = url_score
+            
+            # If brand was specified/detected but domain doesn't match, it's very suspicious
+            if brand and not is_domain_match:
+                # High suspicion: claims to be a brand but domain doesn't match AND site is down
+                phishing_prob = max(url_score, 0.9)  # At least 90% phishing probability
+                print("DEBUG: Brand mismatch + unreachable = HIGH SUSPICION")
+            elif brand and is_domain_match:
+                # Domain matches brand but site is down (could be temporary outage)
+                phishing_prob = url_score
+                print("DEBUG: Domain matches brand, temporary outage likely")
+            else:
+                # No brand context, rely on URL score but add suspicion for unreachable
+                phishing_prob = max(url_score, 0.6)  # At least 60% suspicious if site is down
+                print("DEBUG: No brand context, unreachable site is suspicious")
         else:
             # Site Reachable -> Hybrid Logic
             if v_score and v_score > 0:
