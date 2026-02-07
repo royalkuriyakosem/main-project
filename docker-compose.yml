@@ -1,0 +1,16 @@
+services:
+  phishdetect:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app/app
+      - ./backend/scripts:/app/scripts
+      - ./models:/app/models
+      - ./frontend/src:/app/frontend
+    environment:
+      - DEBUG=true
+    # Increase shared memory size for Chrome (Puppeteer)
+    shm_size: '1gb'

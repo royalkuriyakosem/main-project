@@ -1,0 +1,40 @@
+{
+  "title": "ERROR: The request could not be satisfied",
+  "dom": {
+    "tag": "BODY",
+    "children": [
+      {
+        "tag": "H1",
+        "children": []
+      },
+      {
+        "tag": "H2",
+        "children": []
+      },
+      {
+        "tag": "HR",
+        "children": []
+      },
+      {
+        "tag": "BR",
+        "children": []
+      },
+      {
+        "tag": "BR",
+        "children": []
+      },
+      {
+        "tag": "HR",
+        "children": []
+      },
+      {
+        "tag": "PRE",
+        "children": []
+      },
+      {
+        "tag": "ADDRESS",
+        "children": []
+      }
+    ]
+  }
+}
